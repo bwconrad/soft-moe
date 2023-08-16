@@ -281,11 +281,13 @@ class SoftMoEVisionTransformer(nn.Module):
         return x
 
 
-def soft_moe_vit_tiny(**kwargs) -> SoftMoEVisionTransformer:
+def soft_moe_vit_tiny(
+    num_experts=128, slots_per_expert=1, moe_layer_index=6, **kwargs
+) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
-        num_experts=128,
-        slots_per_expert=1,
-        moe_layer_index=6,
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
         embed_dim=192,
         depth=12,
         num_heads=3,
@@ -293,11 +295,13 @@ def soft_moe_vit_tiny(**kwargs) -> SoftMoEVisionTransformer:
     )
 
 
-def soft_moe_vit_small(**kwargs) -> SoftMoEVisionTransformer:
+def soft_moe_vit_small(
+    num_experts=128, slots_per_expert=1, moe_layer_index=6, **kwargs
+) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
-        num_experts=128,
-        slots_per_expert=1,
-        moe_layer_index=6,
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
         embed_dim=384,
         depth=12,
         num_heads=6,
@@ -305,11 +309,16 @@ def soft_moe_vit_small(**kwargs) -> SoftMoEVisionTransformer:
     )
 
 
-def soft_moe_vit_base(**kwargs) -> SoftMoEVisionTransformer:
+def soft_moe_vit_base(
+    num_experts=128,
+    slots_per_expert=1,
+    moe_layer_index=6,
+    **kwargs,
+) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
-        num_experts=128,
-        slots_per_expert=1,
-        moe_layer_index=6,
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
         embed_dim=768,
         depth=12,
         num_heads=12,
@@ -317,11 +326,16 @@ def soft_moe_vit_base(**kwargs) -> SoftMoEVisionTransformer:
     )
 
 
-def soft_moe_vit_large(**kwargs) -> SoftMoEVisionTransformer:
+def soft_moe_vit_large(
+    num_experts=128,
+    slots_per_expert=1,
+    moe_layer_index=12,
+    **kwargs,
+) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
-        num_experts=128,
-        slots_per_expert=1,
-        moe_layer_index=12,
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
         embed_dim=1024,
         depth=24,
         num_heads=16,
@@ -329,11 +343,16 @@ def soft_moe_vit_large(**kwargs) -> SoftMoEVisionTransformer:
     )
 
 
-def soft_moe_vit_huge(**kwargs) -> SoftMoEVisionTransformer:
+def soft_moe_vit_huge(
+    num_experts=128,
+    slots_per_expert=1,
+    moe_layer_index=16,
+    **kwargs,
+) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
-        num_experts=128,
-        slots_per_expert=1,
-        moe_layer_index=16,
+        num_experts=num_experts,
+        slots_per_expert=slots_per_expert,
+        moe_layer_index=moe_layer_index,
         embed_dim=1280,
         depth=32,
         num_heads=16,
