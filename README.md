@@ -117,6 +117,9 @@ layer = SoftMoELayerWrapper(
 y = layer(x)
 ```
 
+- __Note__: If the name of a layer argument overlaps with one of other arguments (e.g. `dim`) you can pass a partial function to `layer`.
+    - e.g. `layer=partial(MyCustomLayer, dim=128)`
+
 ## Citation
 ```bibtex
 @article{puigcerver2023sparse,
