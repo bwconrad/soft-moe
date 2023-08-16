@@ -20,7 +20,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-#### Initializing a Soft Mixture of Experts Vision Transformer
+### Initializing a Soft Mixture of Experts Vision Transformer
 
 ```python
 import torch
@@ -59,7 +59,7 @@ net = soft_moe_vit_huge()
 net = soft_moe_vit_tiny(num_experts=64, slots_per_expert=2, img_size=128)
 ```
 
-##### Setting the Mixture of Expert Layers
+#### Setting the Mixture of Expert Layers
 
 The `moe_layer_index` argument sets which layer index to use a MoE MLP layers instead of a regular MLP.
 When an `int` is given, all layers starting from that depth index will be MoE layers.
@@ -82,7 +82,7 @@ net = SoftMoEVisionTransformer(
 
 - __Note__: `moe_layer_index` uses __0-index__ convention.
 
-#### Creating a Soft Mixture of Experts Layer 
+### Creating a Soft Mixture of Experts Layer 
 
 The `SoftMoELayerWrapper` class can be used to make any network layer that takes a tensor of shape `[batch, length, dim]` into a Soft Mixture of Experts layer.
 
