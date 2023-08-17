@@ -1,16 +1,16 @@
 # Soft Mixture of Experts
 
 PyTorch implementation of Soft Mixture of Experts (Soft-MoE) from ["From Sparse to Soft Mixtures of Experts"](https://arxiv.org/abs/2308.00951v1).
-This implementation extends the `timm` library's `VisionTransformer` class to support Soft-MoE MLP layers.
+This implementation extends the [`timm`](https://github.com/huggingface/pytorch-image-models) library's `VisionTransformer` class to support Soft-MoE MLP layers.
 
 
 ## Installation
 
-```
-pip install soft-moe-pytorch
-```
+<!-- ``` -->
+<!-- pip install soft-moe-pytorch -->
+<!-- ``` -->
 
-Or install the entire repo with:
+<!-- Or install the entire repo with: -->
 
 ```
 git clone https://github.com/bwconrad/soft-moe
@@ -61,7 +61,7 @@ net = soft_moe_vit_tiny(num_experts=64, slots_per_expert=2, img_size=128)
 
 #### Setting the Mixture of Expert Layers
 
-The `moe_layer_index` argument sets which layer index to use a MoE MLP layers instead of a regular MLP.
+The `moe_layer_index` argument sets at which layer indices to use MoE MLP layers instead of regular MLP layers.
 When an `int` is given, all layers starting from that depth index will be MoE layers.
 
 ```python
@@ -84,7 +84,7 @@ net = SoftMoEVisionTransformer(
 
 ### Creating a Soft Mixture of Experts Layer 
 
-The `SoftMoELayerWrapper` class can be used to make any network layer that takes a tensor of shape `[batch, length, dim]` into a Soft Mixture of Experts layer.
+The `SoftMoELayerWrapper` class can be used to make any network layer, that takes a tensor of shape `[batch, length, dim]`, into a Soft Mixture of Experts layer.
 
 ```python 
 import torch
