@@ -20,6 +20,9 @@ class SoftMoEVisionTransformer(nn.Module):
 
     From the paper "From Sparse to Soft Mixtures of Experts"
     https://arxiv.org/pdf/2308.00951.pdf
+
+    Code modified from:
+    https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/vision_transformer.py
     """
 
     def __init__(
@@ -310,10 +313,7 @@ def soft_moe_vit_small(
 
 
 def soft_moe_vit_base(
-    num_experts=128,
-    slots_per_expert=1,
-    moe_layer_index=6,
-    **kwargs,
+    num_experts=128, slots_per_expert=1, moe_layer_index=6, **kwargs
 ) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
         num_experts=num_experts,
@@ -327,10 +327,7 @@ def soft_moe_vit_base(
 
 
 def soft_moe_vit_large(
-    num_experts=128,
-    slots_per_expert=1,
-    moe_layer_index=12,
-    **kwargs,
+    num_experts=128, slots_per_expert=1, moe_layer_index=12, **kwargs
 ) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
         num_experts=num_experts,
@@ -344,10 +341,7 @@ def soft_moe_vit_large(
 
 
 def soft_moe_vit_huge(
-    num_experts=128,
-    slots_per_expert=1,
-    moe_layer_index=16,
-    **kwargs,
+    num_experts=128, slots_per_expert=1, moe_layer_index=16, **kwargs
 ) -> SoftMoEVisionTransformer:
     return SoftMoEVisionTransformer(
         num_experts=num_experts,
