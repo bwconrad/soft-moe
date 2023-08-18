@@ -49,6 +49,10 @@ class SoftMoELayerWrapper(nn.Module):
         """
         super().__init__()
 
+        self.dim = dim
+        self.num_experts = num_experts
+        self.slots_per_expert = slots_per_expert
+
         # Initialize phi and normalization scaling factor
         self.phi = nn.Parameter(torch.zeros(dim, num_experts, slots_per_expert))
         self.scale = nn.Parameter(torch.ones(1))
@@ -72,6 +76,13 @@ class SoftMoELayerWrapper(nn.Module):
         Returns:
             torch.Tensor: Output tensor of shape [batch_size, seq_len, input_dim].
         """
+        assert (
+            x.shape[-1] == self.dim
+        ), f"Input feature dim of {x.shape[-1]} does not match layer dim of {self.dim}"
+        assert (
+            len(x.shape) == 3
+        ), f"Input expected to have 3 dimensions but has {len(x.shape)}"
+
         # Normalize input and phi
         x = F.normalize(x, dim=2)  # [b, m, d]
         phi = self.scale * F.normalize(self.phi, dim=0)  # [d, n, p]
