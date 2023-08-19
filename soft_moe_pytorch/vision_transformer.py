@@ -152,12 +152,17 @@ class SoftMoEVisionTransformer(nn.Module):
         self.moe_layer_index = moe_layer_index
         if isinstance(moe_layer_index, list):
             # Only the specified layers in moe_layer_index
+            assert len(moe_layer_index) > 0
+            assert all([0 <= l < depth for l in moe_layer_index])
+
             mlp_layers_list = [
                 moe_mlp_layer if i in moe_layer_index else mlp_layer
                 for i in range(depth)
             ]
         else:
             # All layers including and after moe_layer_index
+            assert 0 <= moe_layer_index < depth
+
             mlp_layers_list = [
                 moe_mlp_layer if i >= moe_layer_index else mlp_layer
                 for i in range(depth)
