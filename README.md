@@ -4,6 +4,11 @@ PyTorch implementation of Soft Mixture of Experts (Soft-MoE) from ["From Sparse 
 This implementation extends the [`timm`](https://github.com/huggingface/pytorch-image-models) library's `VisionTransformer` class to support Soft-MoE MLP layers.
 
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/bwconrad/soft-moe/main/assets/fig.png" width="100%" style={text-align: center;}/>
+</p>
+
+
 ## Installation
 
 <!-- ``` -->
