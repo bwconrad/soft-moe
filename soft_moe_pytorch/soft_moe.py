@@ -37,6 +37,7 @@ class SoftMoELayerWrapper(nn.Module):
         num_experts: int,
         slots_per_expert: int,
         layer: Callable,
+        normalize: bool = True,
         **layer_kwargs,
     ) -> None:
         """
@@ -45,6 +46,7 @@ class SoftMoELayerWrapper(nn.Module):
             num_experts (int): Number of experts.
             slots_per_expert (int): Number of token slots per expert.
             layer (Callable): Network layer of the experts.
+            normalize (bool): Normalize input and phi (sec. 2.3 from paper)
             **layer_kwargs: Additional keyword arguments for the layer class.
         """
         super().__init__()
@@ -52,10 +54,12 @@ class SoftMoELayerWrapper(nn.Module):
         self.dim = dim
         self.num_experts = num_experts
         self.slots_per_expert = slots_per_expert
+        self.normalize = normalize
 
         # Initialize phi and normalization scaling factor
         self.phi = nn.Parameter(torch.zeros(dim, num_experts, slots_per_expert))
-        self.scale = nn.Parameter(torch.ones(1))
+        if self.normalize:
+            self.scale = nn.Parameter(torch.ones(1))
 
         # Initialize phi using LeCun normal initialization
         # https://github.com/google-research/vmoe/blob/662341d007650d5bbb7c6a2bef7f3c759a20cc7e/vmoe/projects/soft_moe/router.py#L49C1-L49C1
@@ -83,9 +87,12 @@ class SoftMoELayerWrapper(nn.Module):
             len(x.shape) == 3
         ), f"Input expected to have 3 dimensions but has {len(x.shape)}"
 
+        phi = self.phi
+
         # Normalize input and phi
-        x = F.normalize(x, dim=2)  # [b, m, d]
-        phi = self.scale * F.normalize(self.phi, dim=0)  # [d, n, p]
+        if self.normalize:
+            x = F.normalize(x, dim=2)  # [b, m, d]
+            phi = self.scale * F.normalize(phi, dim=0)  # [d, n, p]
 
         # Compute dispatch and combine weights
         logits = torch.einsum("bmd,dnp->bmnp", x, phi)
