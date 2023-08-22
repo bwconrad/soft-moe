@@ -11,11 +11,11 @@ This implementation extends the [`timm`](https://github.com/huggingface/pytorch-
 
 ## Installation
 
-<!-- ``` -->
-<!-- pip install soft-moe-pytorch -->
-<!-- ``` -->
+```
+pip install soft-moe
+```
 
-<!-- Or install the entire repo with: -->
+Or install the entire repo with:
 
 ```
 git clone https://github.com/bwconrad/soft-moe
@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 ```python
 import torch
-from soft_moe_pytorch import SoftMoEVisionTransformer
+from soft_moe import SoftMoEVisionTransformer
 
 net = SoftMoEVisionTransformer(
     num_experts=128,
@@ -51,9 +51,9 @@ preds = net(img)
 Functions are also available to initialize default network configurations:
 
 ```python
-from soft_moe_pytorch import (soft_moe_vit_base, soft_moe_vit_huge,
-                              soft_moe_vit_large, soft_moe_vit_small,
-                              soft_moe_vit_tiny)
+from soft_moe import (soft_moe_vit_base, soft_moe_vit_huge,
+                      soft_moe_vit_large, soft_moe_vit_small,
+                      soft_moe_vit_tiny)
 
 net = soft_moe_vit_tiny()
 net = soft_moe_vit_small()
@@ -95,7 +95,7 @@ The `SoftMoELayerWrapper` class can be used to make any network layer, that take
 import torch
 import torch.nn as nn
 
-from soft_moe_pytorch import SoftMoELayerWrapper
+from soft_moe import SoftMoELayerWrapper
 
 x = torch.rand(1, 16, 128)
 
